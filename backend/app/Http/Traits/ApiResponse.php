@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Traits;
+
+trait ApiResponse
+{
+    protected function success($data = null, $message = 'Success', $code = 200)
+    {
+        return response()->json([
+            'success' => true,
+            'message' => $message,
+            'errors'  => null,
+            'data'    => $data,
+        ], $code);
+    }
+
+    protected function error($message = 'Error', $errors = null, $code = 400)
+    {
+        return response()->json([
+            'success' => false,
+            'message' => $message,
+            'errors'  => $errors,
+            'data'    => null,
+        ], $code);
+    }
+}
