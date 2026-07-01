@@ -1,0 +1,49 @@
+# =========================
+# Laravel Backend Ignored
+# =========================
+/backend/vendor/
+/backend/node_modules/
+/backend/public/build/
+/backend/public/hot/
+/backend/public/storage/
+/backend/storage/*.key
+/backend/.env
+/backend/.env.backup
+/backend/.env.production
+/backend/.phpunit.result.cache
+/backend/Homestead.json
+/backend/Homestead.yaml
+/backend/npm-debug.log
+/backend/yarn-error.log
+/backend/.buildpath
+/backend/.project
+/backend/.settings
+/backend/coverage/
+
+# =========================
+# Next.js Frontend Ignored
+# =========================
+/frontend/node_modules/
+/frontend/.pnp
+/frontend/.pnp.js
+/frontend/coverage/
+/frontend/.next/
+/frontend/out/
+/frontend/build/
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
+/frontend/.vercel/
+/frontend/*.tsbuildinfo
+/frontend/next-env.d.ts
+
+# =========================
+# OS & IDEs Ignored
+# =========================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.log
