@@ -1,0 +1,162 @@
+{
+    "info": {
+        "name": "Company Landing Website API",
+        "description": "Full Postman collection for the company landing website Laravel API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000/api",
+            "type": "string"
+        },
+        {
+            "key": "admin_token",
+            "value": "your_admin_token_here",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Public API",
+            "item": [
+                {
+                    "name": "Get Hero",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/hero"
+                    }
+                },
+                {
+                    "name": "Get About",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/about"
+                    }
+                },
+                {
+                    "name": "Get Services",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/services"
+                    }
+                },
+                {
+                    "name": "Get Features",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/features"
+                    }
+                },
+                {
+                    "name": "Get Portfolio",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/portfolio"
+                    }
+                },
+                {
+                    "name": "Get Testimonials",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/testimonials"
+                    }
+                },
+                {
+                    "name": "Get Team Members",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/team-members"
+                    }
+                },
+                {
+                    "name": "Get FAQs",
+                    "request": {
+                        "method": "GET",
+                        "url": "{{base_url}}/faqs"
+                    }
+                },
+                {
+                    "name": "Submit Contact Form",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\\n  \"name\": \"John Doe\",\\n  \"email\": \"john@example.com\",\\n  \"phone\": \"123-456-7890\",\\n  \"subject\": \"Inquiry\",\\n  \"message\": \"Hello!\"\\n}"
+                        },
+                        "url": "{{base_url}}/contact"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Admin API",
+            "item": [
+                {
+                    "name": "Get Contact Messages",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{admin_token}}"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "url": "{{base_url}}/contact"
+                    }
+                },
+                {
+                    "name": "Mark Contact Message as Read",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{admin_token}}"
+                                }
+                            ]
+                        },
+                        "method": "PATCH",
+                        "url": "{{base_url}}/contact/1/read"
+                    }
+                },
+                {
+                    "name": "Update Hero",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{admin_token}}"
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\\n  \"title\": \"New Title\",\\n  \"subtitle\": \"New Subtitle\",\\n  \"is_active\": true\\n}"
+                        },
+                        "url": "{{base_url}}/hero"
+                    }
+                }
+            ]
+        }
+    ]
+}

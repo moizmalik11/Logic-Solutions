@@ -9,6 +9,9 @@ use App\Http\Controllers\Api\FeatureController;
 use App\Http\Controllers\Api\PortfolioController;
 use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\TeamMemberController;
+use App\Http\Controllers\Api\FaqController;
+use App\Http\Controllers\Api\ContactController;
+
 
 
 /*
@@ -34,6 +37,12 @@ Route::get('/testimonials/{id}', [TestimonialController::class, 'show']);
 
 Route::get('/team-members', [TeamMemberController::class, 'index']);
 Route::get('/team-members/{id}', [TeamMemberController::class, 'show']);
+Route::get('/faqs', [FaqController::class, 'index']);
+Route::get('/faqs/{id}', [FaqController::class, 'show']);
+
+// Rate limiting (5 per minute) and public endpoint for contact
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1');
+
 
 
 // Admin Protected Routes
@@ -64,5 +73,14 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/team-members', [TeamMemberController::class, 'store']);
     Route::put('/team-members/{id}', [TeamMemberController::class, 'update']);
     Route::delete('/team-members/{id}', [TeamMemberController::class, 'destroy']);
+    // FAQs
+    Route::post('/faqs', [FaqController::class, 'store']);
+    Route::put('/faqs/{id}', [FaqController::class, 'update']);
+    Route::delete('/faqs/{id}', [FaqController::class, 'destroy']);
+
+    // Contact Messages (Admin)
+    Route::get('/contact', [ContactController::class, 'index']);
+    Route::patch('/contact/{id}/read', [ContactController::class, 'markAsRead']);
+
 
 });
