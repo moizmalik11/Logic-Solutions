@@ -36,7 +36,7 @@ export default async function About() {
                     {aboutData.image && (
                         <div>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={aboutData.image} alt="About Us" className="w-full h-auto rounded shadow-lg" />
+                            <img src={aboutData.image} alt={aboutData.title} className="w-full h-auto rounded shadow-lg" />
                         </div>
                     )}
                 </div>

@@ -21,7 +21,7 @@ export default async function Team() {
                             <Card key={member.id} className="text-center flex flex-col items-center p-6">
                                 {member.photo ? (
                                     /* eslint-disable-next-line @next/next/no-img-element */
-                                    <img src={member.photo} alt={member.name} className="w-32 h-32 rounded-full object-cover mb-4" />
+                                    <img src={member.photo} alt={`${member.name} - ${member.role}`} className="w-32 h-32 rounded-full object-cover mb-4" />
                                 ) : (
                                     <div className="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center text-3xl font-bold text-gray-500 mb-4">
                                         {member.name.charAt(0)}
