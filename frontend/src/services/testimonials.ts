@@ -1,0 +1,1 @@
+import { fetchApi } from './api';\nimport { Testimonial } from '../types';\n\nexport const getTestimonials = () => fetchApi<Testimonial[]>('/testimonials');\nexport const getTestimonialById = (id: number) => fetchApi<Testimonial>(`/testimonials/${id}`);\n

@@ -1,0 +1,1 @@
+import { fetchApi } from './api';\nimport { TeamMember } from '../types';\n\nexport const getTeamMembers = () => fetchApi<TeamMember[]>('/team-members');\nexport const getTeamMemberById = (id: number) => fetchApi<TeamMember>(`/team-members/${id}`);\n

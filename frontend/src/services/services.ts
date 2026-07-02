@@ -1,0 +1,1 @@
+import { fetchApi } from './api';\nimport { Service } from '../types';\n\nexport const getServices = () => fetchApi<Service[]>('/services');\nexport const getServiceById = (id: number) => fetchApi<Service>(`/services/${id}`);\n

@@ -1,0 +1,1 @@
+import { fetchApi } from './api';\nimport { ContactMessage } from '../types';\n\nexport const submitContactForm = (data: Partial<ContactMessage>) => fetchApi<ContactMessage>('/contact', {\n    method: 'POST',\n    body: JSON.stringify(data)\n});\n

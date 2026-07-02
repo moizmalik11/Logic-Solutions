@@ -1,0 +1,1 @@
+import { fetchApi } from './api';\nimport { Hero } from '../types';\n\nexport const getHero = () => fetchApi<Hero>('/hero');\n
