@@ -1,1 +1,5 @@
-import { fetchApi } from './api';\nimport { Feature } from '../types';\n\nexport const getFeatures = () => fetchApi<Feature[]>('/features');\nexport const getFeatureById = (id: number) => fetchApi<Feature>(`/features/${id}`);\n
+import { fetchApi } from './api';
+import { Feature } from '../types';
+
+export const getFeatures = () => fetchApi<Feature[]>('/features');
+export const getFeatureById = (id: number) => fetchApi<Feature>(`/features/${id}`);

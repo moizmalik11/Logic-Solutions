@@ -1,1 +1,10 @@
-export * from './hero';\nexport * from './about';\nexport * from './services';\nexport * from './features';\nexport * from './portfolio';\nexport * from './testimonials';\nexport * from './team';\nexport * from './faq';\nexport * from './contact';\nexport * from './api';\n
+export * from './hero';
+export * from './about';
+export * from './services';
+export * from './features';
+export * from './portfolio';
+export * from './testimonials';
+export * from './team';
+export * from './faq';
+export * from './contact';
+export * from './api';

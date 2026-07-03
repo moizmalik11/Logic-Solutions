@@ -1,1 +1,5 @@
-import { fetchApi } from './api';\nimport { Portfolio } from '../types';\n\nexport const getPortfolios = () => fetchApi<Portfolio[]>('/portfolio');\nexport const getPortfolioById = (id: number) => fetchApi<Portfolio>(`/portfolio/${id}`);\n
+import { fetchApi } from './api';
+import { Portfolio } from '../types';
+
+export const getPortfolios = () => fetchApi<Portfolio[]>('/portfolio');
+export const getPortfolioById = (id: number) => fetchApi<Portfolio>(`/portfolio/${id}`);
