@@ -12,7 +12,7 @@ export default async function Features() {
         }
 
         return (
-            <section id="features" className="py-16 px-4">
+            <section id="features" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader title="Why Choose Us" subtitle="Our key features that set us apart" />
                     

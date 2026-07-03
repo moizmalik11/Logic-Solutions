@@ -12,7 +12,7 @@ export default async function Team() {
         }
 
         return (
-            <section id="team" className="py-16 px-4">
+            <section id="team" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader title="Meet Our Team" subtitle="The passionate people behind our success" />
                     
@@ -29,7 +29,7 @@ export default async function Team() {
                                 )}
                                 
                                 <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                                <p className="text-blue-600 font-medium mb-3">{member.role}</p>
+                                <p className="text-primary-600 font-medium mb-3">{member.role}</p>
                                 
                                 {member.bio && <p className="text-gray-600 text-sm mb-4">{member.bio}</p>}
                                 

@@ -9,14 +9,14 @@ export default async function Services() {
 
         if (!servicesData || servicesData.length === 0) {
             return (
-                <section id="services" className="py-16 px-4">
+                <section id="services" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8">
                     <SectionHeader title="Our Services" subtitle="No services available at the moment." />
                 </section>
             );
         }
 
         return (
-            <section id="services" className="py-16 px-4 bg-gray-50">
+            <section id="services" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader title="Our Services" subtitle="What we offer to help your business grow" />
                     
@@ -24,7 +24,7 @@ export default async function Services() {
                         {servicesData.map((service) => (
                             <Card key={service.id} className="text-center">
                                 {/* Normally an icon component would be rendered here based on service.icon */}
-                                <div className="mb-4 text-4xl text-blue-600">
+                                <div className="mb-4 text-4xl text-primary-600">
                                     <i className={`icon-${service.icon}`}></i>
                                 </div>
                                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>

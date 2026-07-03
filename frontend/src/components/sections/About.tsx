@@ -11,7 +11,7 @@ export default async function About() {
         }
 
         return (
-            <section id="about" className="py-16 px-4 max-w-7xl mx-auto">
+            <section id="about" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
                 <SectionHeader title={aboutData.title} />
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

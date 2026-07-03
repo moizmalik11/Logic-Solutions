@@ -12,7 +12,7 @@ export default async function FAQ() {
         }
 
         return (
-            <section id="faq" className="py-16 px-4 bg-gray-50">
+            <section id="faq" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
                 <div className="max-w-7xl mx-auto">
                     <SectionHeader title="Frequently Asked Questions" subtitle="Find answers to common questions" />
                     <FAQClient faqs={faqsData} />

@@ -84,7 +84,7 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="py-16 px-4">
+        <section id="contact" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
                 <SectionHeader title="Contact Us" subtitle="We'd love to hear from you" />
 
@@ -167,7 +167,7 @@ export default function Contact() {
                         </div>
 
                         <div>
-                            <Button type="submit" variant="primary" isLoading={isLoading} disabled={isLoading} className="w-full md:w-auto px-8 py-3 bg-blue-600 text-white hover:bg-blue-700 rounded font-bold">
+                            <Button type="submit" variant="primary" isLoading={isLoading} disabled={isLoading} className="w-full md:w-auto px-8 py-3 bg-primary-600 text-white hover:bg-blue-700 rounded font-bold">
                                 Send Message
                             </Button>
                         </div>
