@@ -27,7 +27,7 @@ export default function PortfolioClient({ items }: { items: Portfolio[] }) {
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                             activeCategory === category 
                             ? 'bg-primary-600 text-white' 
-                            : 'bg-white text-gray-600 hover:bg-gray-100 shadow-sm border border-gray-200'
+                            : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 shadow-sm border border-gray-200 dark:border-gray-600'
                         }`}
                     >
                         {category}
@@ -51,8 +51,8 @@ export default function PortfolioClient({ items }: { items: Portfolio[] }) {
                             <span className="text-xs font-semibold text-primary-600 uppercase tracking-wider mb-2">
                                 {item.category}
                             </span>
-                            <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                            <p className="text-gray-600 flex-1">{item.description}</p>
+                            <h3 className="text-xl font-bold mb-2 dark:text-white">{item.title}</h3>
+                            <p className="text-gray-600 dark:text-gray-400 flex-1">{item.description}</p>
                             
                             {item.url && (
                                 <a href={item.url} target="_blank" rel="noopener noreferrer" className="mt-4 text-primary-600 font-medium hover:underline inline-flex items-center">

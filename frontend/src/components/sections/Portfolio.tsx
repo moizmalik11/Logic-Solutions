@@ -2,6 +2,7 @@ import React from 'react';
 import { getPortfolios } from '../../services/portfolio';
 import { SectionHeader } from '../ui/SectionHeader';
 import PortfolioClient from './PortfolioClient';
+import { AnimatedSection } from '../ui/AnimatedSection';
 
 export default async function Portfolio() {
     try {
@@ -12,11 +13,11 @@ export default async function Portfolio() {
         }
 
         return (
-            <section id="portfolio" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
-                <div className="max-w-7xl mx-auto">
+            <section id="portfolio" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
+                <AnimatedSection className="max-w-7xl mx-auto">
                     <SectionHeader title="Our Work" subtitle="Explore our latest projects" />
                     <PortfolioClient items={portfolioData} />
-                </div>
+                </AnimatedSection>
             </section>
         );
     } catch (error) {

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { submitContactForm, ApiError } from '../../services';
 import { SectionHeader } from '../ui/SectionHeader';
 import { Button } from '../ui/Button';
+import { AnimatedSection } from '../ui/AnimatedSection';
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -46,7 +47,6 @@ export default function Contact() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        // Clear field error on change
         if (errors[e.target.name]) {
             setErrors({ ...errors, [e.target.name]: '' });
         }
@@ -68,7 +68,6 @@ export default function Contact() {
             if (error instanceof ApiError) {
                 setGlobalError(error.message);
                 if (error.errors) {
-                    // Map backend validation errors to frontend state
                     const backendErrors: Record<string, string> = {};
                     Object.keys(error.errors).forEach(key => {
                         backendErrors[key] = error.errors![key][0];
@@ -84,14 +83,14 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
+        <section id="contact" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
+            <AnimatedSection className="max-w-4xl mx-auto">
                 <SectionHeader title="Contact Us" subtitle="We'd love to hear from you" />
 
-                <div className="bg-white rounded-lg shadow-lg p-8">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
                     {submitSuccess && (
                         <div className="mb-6 p-4 bg-green-100 text-green-700 rounded border border-green-200">
-                            Thank you! Your message has been sent successfully. We'll be in touch soon.
+                            Thank you! Your message has been sent successfully. We&apos;ll be in touch soon.
                         </div>
                     )}
 
@@ -104,25 +103,25 @@ export default function Contact() {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name *</label>
                                 <input
                                     type="text"
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className={`w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 focus:outline-none ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                                    className={`w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600 ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                                 />
                                 {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email *</label>
                                 <input
                                     type="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className={`w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 focus:outline-none ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                                    className={`w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600 ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                                 />
                                 {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
                             </div>
@@ -130,50 +129,50 @@ export default function Contact() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone *</label>
                                 <input
                                     type="text"
                                     name="phone"
                                     value={formData.phone}
                                     onChange={handleChange}
-                                    className={`w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 focus:outline-none ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
+                                    className={`w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600 ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
                                 />
                                 {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
                             </div>
 
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Subject *</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject *</label>
                                 <input
                                     type="text"
                                     name="subject"
                                     value={formData.subject}
                                     onChange={handleChange}
-                                    className={`w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 focus:outline-none ${errors.subject ? 'border-red-500' : 'border-gray-300'}`}
+                                    className={`w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600 ${errors.subject ? 'border-red-500' : 'border-gray-300'}`}
                                 />
                                 {errors.subject && <p className="mt-1 text-sm text-red-500">{errors.subject}</p>}
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message *</label>
                             <textarea
                                 name="message"
                                 rows={5}
                                 value={formData.message}
                                 onChange={handleChange}
-                                className={`w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 focus:outline-none ${errors.message ? 'border-red-500' : 'border-gray-300'}`}
+                                className={`w-full p-3 border rounded focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600 ${errors.message ? 'border-red-500' : 'border-gray-300'}`}
                             ></textarea>
                             {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
                         </div>
 
                         <div>
-                            <Button type="submit" variant="primary" isLoading={isLoading} disabled={isLoading} className="w-full md:w-auto px-8 py-3 bg-primary-600 text-white hover:bg-blue-700 rounded font-bold">
+                            <Button type="submit" variant="primary" isLoading={isLoading} disabled={isLoading} className="w-full md:w-auto px-8 py-3">
                                 Send Message
                             </Button>
                         </div>
                     </form>
                 </div>
-            </div>
+            </AnimatedSection>
         </section>
     );
 }
