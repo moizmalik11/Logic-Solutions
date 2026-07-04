@@ -32,7 +32,6 @@ export default async function Services() {
             </section>
         );
     } catch (error) {
-        console.error("Failed to fetch services:", error);
         return <div className="p-8 text-center text-red-500">Failed to load Services section</div>;
     }
 }

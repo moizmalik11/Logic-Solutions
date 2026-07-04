@@ -2,6 +2,7 @@ import React from 'react';
 import { getAbout } from '../../services/about';
 import { SectionHeader } from '../ui/SectionHeader';
 import { AnimatedSection } from '../ui/AnimatedSection';
+import Image from 'next/image';
 
 export default async function About() {
     try {
@@ -36,9 +37,13 @@ export default async function About() {
                         </div>
                         
                         {aboutData.image && (
-                            <div>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img src={aboutData.image} alt={aboutData.title} className="w-full h-auto rounded shadow-lg" />
+                            <div className="relative w-full aspect-video rounded shadow-lg overflow-hidden">
+                                <Image 
+                                    src={aboutData.image} 
+                                    alt={aboutData.title} 
+                                    fill
+                                    className="object-cover" 
+                                />
                             </div>
                         )}
                     </div>
@@ -46,7 +51,6 @@ export default async function About() {
             </section>
         );
     } catch (error) {
-        console.error("Failed to fetch about:", error);
         return <div className="p-8 text-center text-red-500">Failed to load About section</div>;
     }
 }

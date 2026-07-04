@@ -21,7 +21,6 @@ export default async function FAQ() {
             </section>
         );
     } catch (error) {
-        console.error("Failed to fetch FAQs:", error);
         return <div className="p-8 text-center text-red-500">Failed to load FAQ section</div>;
     }
 }

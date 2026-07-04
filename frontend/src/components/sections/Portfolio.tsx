@@ -21,7 +21,6 @@ export default async function Portfolio() {
             </section>
         );
     } catch (error) {
-        console.error("Failed to fetch portfolio:", error);
         return <div className="p-8 text-center text-red-500">Failed to load Portfolio section</div>;
     }
 }

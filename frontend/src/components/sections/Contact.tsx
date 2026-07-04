@@ -64,7 +64,7 @@ export default function Contact() {
             await submitContactForm(formData);
             setSubmitSuccess(true);
             setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-        } catch (error: any) {
+        } catch (error: unknown) {
             if (error instanceof ApiError) {
                 setGlobalError(error.message);
                 if (error.errors) {

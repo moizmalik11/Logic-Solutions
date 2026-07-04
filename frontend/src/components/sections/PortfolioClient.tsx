@@ -40,11 +40,11 @@ export default function PortfolioClient({ items }: { items: Portfolio[] }) {
                 {filteredItems.map((item) => (
                     <Card key={item.id} className="overflow-hidden p-0 flex flex-col group">
                         <div className="relative w-full h-56 overflow-hidden">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img 
+                            <Image 
                                 src={item.image} 
                                 alt={item.title} 
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-110" 
                             />
                         </div>
                         <div className="p-6 flex-1 flex flex-col">

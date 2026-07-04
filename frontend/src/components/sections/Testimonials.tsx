@@ -3,6 +3,7 @@ import { getTestimonials } from '../../services/testimonials';
 import { SectionHeader } from '../ui/SectionHeader';
 import { Card } from '../ui/Card';
 import { AnimatedSection } from '../ui/AnimatedSection';
+import Image from 'next/image';
 
 export default async function Testimonials() {
     try {
@@ -28,8 +29,13 @@ export default async function Testimonials() {
                                 </div>
                                 <div className="flex items-center mt-4">
                                     {testimonial.avatar ? (
-                                        /* eslint-disable-next-line @next/next/no-img-element */
-                                        <img src={testimonial.avatar} alt={testimonial.client_name} className="w-12 h-12 rounded-full mr-4 object-cover" />
+                                        <Image 
+                                            src={testimonial.avatar} 
+                                            alt={testimonial.client_name} 
+                                            width={48}
+                                            height={48}
+                                            className="w-12 h-12 rounded-full mr-4 object-cover" 
+                                        />
                                     ) : (
                                         <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 mr-4 flex items-center justify-center text-xl font-bold text-gray-500">
                                             {testimonial.client_name.charAt(0)}
@@ -47,7 +53,6 @@ export default async function Testimonials() {
             </section>
         );
     } catch (error) {
-        console.error("Failed to fetch testimonials:", error);
         return <div className="p-8 text-center text-red-500">Failed to load Testimonials section</div>;
     }
 }

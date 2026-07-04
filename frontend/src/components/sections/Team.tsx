@@ -3,6 +3,7 @@ import { getTeamMembers } from '../../services/team';
 import { SectionHeader } from '../ui/SectionHeader';
 import { Card } from '../ui/Card';
 import { AnimatedSection } from '../ui/AnimatedSection';
+import Image from 'next/image';
 
 export default async function Team() {
     try {
@@ -21,8 +22,13 @@ export default async function Team() {
                         {teamData.map((member) => (
                             <Card key={member.id} className="text-center flex flex-col items-center p-6">
                                 {member.photo ? (
-                                    /* eslint-disable-next-line @next/next/no-img-element */
-                                    <img src={member.photo} alt={`${member.name} - ${member.role}`} className="w-32 h-32 rounded-full object-cover mb-4" />
+                                    <Image 
+                                        src={member.photo} 
+                                        alt={`${member.name} - ${member.role}`} 
+                                        width={128}
+                                        height={128}
+                                        className="w-32 h-32 rounded-full object-cover mb-4" 
+                                    />
                                 ) : (
                                     <div className="w-32 h-32 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-3xl font-bold text-gray-500 mb-4">
                                         {member.name.charAt(0)}
@@ -53,7 +59,6 @@ export default async function Team() {
             </section>
         );
     } catch (error) {
-        console.error("Failed to fetch team:", error);
         return <div className="p-8 text-center text-red-500">Failed to load Team section</div>;
     }
 }

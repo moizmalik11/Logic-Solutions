@@ -32,7 +32,6 @@ export default async function Features() {
             </section>
         );
     } catch (error) {
-        console.error("Failed to fetch features:", error);
         return <div className="p-8 text-center text-red-500">Failed to load Features section</div>;
     }
 }
