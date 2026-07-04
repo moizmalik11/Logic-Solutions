@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer';
 import { Hero, About, Services, Features, Portfolio, Testimonials, Team, FAQ, Contact } from '@/components/sections';
 import { getHero } from '@/services/hero';
 import { getAbout } from '@/services/about';
+import HeroShutter from '@/components/ui/HeroShutter';
 
 export async function generateMetadata(): Promise<Metadata> {
   const heroData = await getHero().catch(() => null);
@@ -70,21 +71,22 @@ export default async function Home() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="relative">
         {/* Inject JSON-LD Script */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Hero />
-        <About />
-        <Services />
-        <Features />
-        <Portfolio />
-        <Testimonials />
-        <Team />
-        <FAQ />
-        <Contact />
+        <HeroShutter hero={<Hero />}>
+          <About />
+          <Services />
+          <Features />
+          <Portfolio />
+          <Testimonials />
+          <Team />
+          <FAQ />
+          <Contact />
+        </HeroShutter>
       </main>
       <Footer />
     </>

@@ -1,13 +1,25 @@
 import React from 'react';
 
-interface CardProps {
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
-    className?: string;
+    hoverEffect?: boolean;
 }
 
-export function Card({ children, className = '' }: CardProps) {
+export function Card({ children, className = '', hoverEffect = true, ...props }: CardProps) {
     return (
-        <div className={`bg-white dark:bg-gray-800 dark:text-gray-200 border border-transparent dark:border-gray-700 rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 p-6 ${className}`}>
+        <div 
+            className={`
+                bg-light-surface/80 dark:bg-dark-surface/80 
+                backdrop-blur-md 
+                border border-light-border/50 dark:border-dark-border/50 
+                rounded-2xl p-8 
+                shadow-soft 
+                transition-all duration-300
+                ${hoverEffect ? 'hover:shadow-lg hover:-translate-y-1 hover:border-light-accent/30 dark:hover:border-dark-accent/30' : ''}
+                ${className}
+            `}
+            {...props}
+        >
             {children}
         </div>
     );

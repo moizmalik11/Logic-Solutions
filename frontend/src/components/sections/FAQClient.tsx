@@ -15,29 +15,48 @@ export default function FAQClient({ faqs }: FAQClientProps) {
     };
 
     return (
-        <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, index) => (
-                <div key={faq.id} className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <button
-                        className="w-full text-left py-4 px-6 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-primary-500 hover:bg-gray-50 dark:hover:bg-gray-700"
-                        onClick={() => toggle(index)}
-                        aria-expanded={openIndex === index}
-                    >
-                        <span className={`font-medium text-lg transition-colors duration-300 ${openIndex === index ? 'text-primary-600' : 'text-gray-900 dark:text-gray-100'}`}>{faq.question}</span>
-                        <span className={`text-2xl transform transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-primary-600' : 'text-gray-400'}`}>
-                            ↓
-                        </span>
-                    </button>
-                    
-                    <div className={`grid transition-all duration-300 ease-in-out ${openIndex === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
-                        <div className="overflow-hidden">
-                            <div className="py-4 px-6 text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700">
+        <div className="max-w-4xl mx-auto divide-y divide-light-border/40 dark:divide-dark-border/40 border-t border-b border-light-border/40 dark:border-dark-border/40">
+            {faqs.map((faq, index) => {
+                const isOpen = openIndex === index;
+                return (
+                    <div key={faq.id} className="py-6 md:py-8 transition-colors duration-300">
+                        <button
+                            className="w-full text-left flex justify-between items-center focus:outline-none group gap-6"
+                            onClick={() => toggle(index)}
+                        >
+                            <span className={`heading-md transition-colors duration-300 ${
+                                isOpen ? 'text-brand-wood' : 'group-hover:text-brand-wood'
+                            }`}>
+                                {faq.question}
+                            </span>
+                            
+                            {/* Minimal Plus/Minus Indicator */}
+                            <span className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full border border-light-border/60 dark:border-dark-border/60 transition-all duration-300 group-hover:border-brand-wood">
+                                {isOpen ? (
+                                    <svg className="w-4 h-4 text-brand-wood" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                                    </svg>
+                                ) : (
+                                    <svg className="w-4 h-4 text-light-textMuted dark:text-dark-textMuted group-hover:text-brand-wood" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                                    </svg>
+                                )}
+                            </span>
+                        </button>
+                        
+                        {/* Smooth Slide Down Panel */}
+                        <div 
+                            className={`overflow-hidden transition-all duration-500 ease-out ${
+                                isOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0 pointer-events-none'
+                            }`}
+                        >
+                            <p className="body-base">
                                 {faq.answer}
-                            </div>
+                            </p>
                         </div>
                     </div>
-                </div>
-            ))}
+                );
+            })}
         </div>
     );
 }

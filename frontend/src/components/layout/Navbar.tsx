@@ -3,104 +3,178 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 
+/* ── Ultra Minimal Theme Toggle ── */
 function ThemeToggle() {
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
-
     useEffect(() => setMounted(true), []);
-    if (!mounted) return <div className="w-8 h-8" />;
+    if (!mounted) return <div className="w-[76px] h-[32px]" />;
+
+    const isDark = theme === 'dark';
 
     return (
         <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            aria-label="Toggle Dark Mode"
+            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+            aria-label="Toggle theme"
+            className={`
+                relative w-[76px] h-[32px] rounded-full transition-colors duration-500 focus:outline-none flex items-center p-1
+                ${isDark ? 'bg-black/40 border border-white/10 shadow-inner' : 'bg-white border border-gray-200 shadow-sm'}
+            `}
         >
-            {theme === 'dark' ? (
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-            ) : (
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-            )}
+            {/* Background Texts */}
+            <span 
+                className={`absolute left-2.5 text-[9px] font-bold tracking-wider transition-opacity duration-300 ${isDark ? 'opacity-0' : 'opacity-100 text-gray-400'}`}
+            >
+                LIGHT
+            </span>
+            <span 
+                className={`absolute right-2.5 text-[9px] font-bold tracking-wider transition-opacity duration-300 ${isDark ? 'opacity-100 text-gray-400' : 'opacity-0'}`}
+            >
+                DARK
+            </span>
+
+            {/* Sliding Knob */}
+            <span
+                className={`
+                    absolute w-[24px] h-[24px] rounded-full flex items-center justify-center transition-all duration-500 shadow-sm z-10
+                    ${isDark ? 'translate-x-0 bg-white' : 'translate-x-[44px] bg-black'}
+                `}
+            >
+                {isDark ? (
+                    /* Moon Icon */
+                    <svg className="w-[12px] h-[12px] text-black" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                    </svg>
+                ) : (
+                    /* Sun Icon */
+                    <svg className="w-[14px] h-[14px] text-white" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18.75a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-1.5a.75.75 0 01.75-.75zM6.166 18.894a.75.75 0 001.06 1.06l1.59-1.591a.75.75 0 10-1.06-1.061l-1.591 1.59zM4.5 12a.75.75 0 01-.75-.75H1.5a.75.75 0 010 1.5h2.25a.75.75 0 01.75-.75zM6.166 5.106a.75.75 0 00-1.06 1.06l1.591 1.59a.75.75 0 101.06-1.061l-1.59-1.59z" />
+                    </svg>
+                )}
+            </span>
         </button>
     );
 }
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [activeLink, setActiveLink] = useState('');
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 30);
+        window.addEventListener('scroll', onScroll);
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     const navLinks = [
-        { name: 'Home', href: '#hero' },
-        { name: 'About', href: '#about' },
-        { name: 'Services', href: '#services' },
-        { name: 'Features', href: '#features' },
+        { name: 'Home',      href: '#hero' },
+        { name: 'About',     href: '#about' },
+        { name: 'Services',  href: '#services' },
         { name: 'Portfolio', href: '#portfolio' },
-        { name: 'Team', href: '#team' },
-        { name: 'FAQ', href: '#faq' },
-        { name: 'Contact', href: '#contact' },
+        { name: 'Team',      href: '#team' },
+        { name: 'Contact',   href: '#contact' },
     ];
 
     return (
-        <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    <div className="flex items-center">
-                        <span className="text-2xl font-bold text-primary-600">CompanyLogo</span>
-                    </div>
-                    
-                    {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center space-x-6">
-                        {navLinks.map((link) => (
-                            <a 
-                                key={link.name} 
-                                href={link.href} 
-                                className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                        <ThemeToggle />
+        <nav
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+                scrolled
+                    ? 'bg-black/70 backdrop-blur-2xl border-b border-white/[0.06]'
+                    : 'bg-transparent'
+            }`}
+        >
+            <div className="max-w-7xl mx-auto px-6 md:px-14">
+                <div className="flex items-center justify-between h-[68px]">
+
+                    {/* ── LEFT: Wordmark only ── */}
+                    <a
+                        href="#hero"
+                        className="text-white font-black text-2xl tracking-tight select-none hover:opacity-80 transition-opacity"
+                        style={{ letterSpacing: '-0.03em' }}
+                    >
+                        Logic<span className="text-brand-brass">Solution</span>
+                    </a>
+
+                    {/* ── CENTER: Nav Links ── */}
+                    <div className="hidden md:flex items-center">
+                        {/* Pill container — no border, subtle bg only when scrolled */}
+                        <div className={`flex items-center gap-0.5 rounded-full px-1.5 py-1.5 transition-all duration-500 ${
+                            scrolled ? 'bg-white/5' : ''
+                        }`}>
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setActiveLink(link.name)}
+                                    className={`px-4 py-1.5 text-sm rounded-full font-medium transition-all duration-200 ${
+                                        activeLink === link.name
+                                            ? 'bg-white/10 text-white'
+                                            : 'text-white/55 hover:text-white hover:bg-white/5'
+                                    }`}
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                        </div>
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="flex items-center space-x-3 md:hidden">
+                    {/* ── RIGHT: Toggle + CTA ── */}
+                    <div className="hidden md:flex items-center gap-4">
                         <ThemeToggle />
-                        <button 
-                            onClick={() => setIsOpen(!isOpen)} 
-                            className="text-gray-700 dark:text-gray-300 hover:text-primary-600 focus:outline-none"
+
+                        <a
+                            href="#contact"
+                            className="group inline-flex items-center gap-2 bg-brand-brass hover:bg-amber-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-300 tracking-wide shadow-lg shadow-brand-brass/20 hover:shadow-brand-brass/40"
                         >
-                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                {isOpen ? (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                )}
+                            Get In Touch
+                            <svg
+                                className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
+                        </a>
+                    </div>
+
+                    {/* ── Mobile: Toggle + Hamburger ── */}
+                    <div className="flex items-center gap-3 md:hidden">
+                        <ThemeToggle />
+                        <button
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="relative w-8 h-8 flex flex-col justify-center items-center gap-[5px] group"
+                            aria-label="Menu"
+                        >
+                            <span className={`block h-px bg-white transition-all duration-300 origin-center ${isOpen ? 'w-5 rotate-45 translate-y-[6px]' : 'w-5'}`} />
+                            <span className={`block h-px bg-white transition-all duration-300 ${isOpen ? 'w-0 opacity-0' : 'w-4'}`} />
+                            <span className={`block h-px bg-white transition-all duration-300 origin-center ${isOpen ? 'w-5 -rotate-45 -translate-y-[6px]' : 'w-5'}`} />
                         </button>
                     </div>
                 </div>
             </div>
 
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                onClick={() => setIsOpen(false)}
-                                className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 hover:bg-gray-50 dark:hover:bg-gray-800 rounded"
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                    </div>
+            {/* ── Mobile Menu ── */}
+            <div className={`md:hidden overflow-hidden transition-all duration-400 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}>
+                <div className="bg-black/90 backdrop-blur-2xl border-t border-white/5 px-6 py-5 flex flex-col gap-1">
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.name}
+                            href={link.href}
+                            onClick={() => setIsOpen(false)}
+                            className="px-3 py-3 text-sm font-medium text-white/60 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                        >
+                            {link.name}
+                        </a>
+                    ))}
+                    <a
+                        href="#contact"
+                        onClick={() => setIsOpen(false)}
+                        className="mt-3 text-center bg-brand-brass hover:bg-amber-600 text-white text-sm font-semibold px-4 py-3 rounded-full transition-colors"
+                    >
+                        Get In Touch
+                    </a>
                 </div>
-            )}
+            </div>
         </nav>
     );
 }

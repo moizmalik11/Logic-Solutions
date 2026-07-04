@@ -13,14 +13,14 @@ export default async function FAQ() {
         }
 
         return (
-            <section id="faq" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
-                <AnimatedSection className="max-w-7xl mx-auto">
+            <section id="faq" className="py-12 lg:py-16 bg-transparent relative">
+                <AnimatedSection className="max-w-7xl mx-auto px-5 lg:px-8">
                     <SectionHeader title="Frequently Asked Questions" subtitle="Find answers to common questions" />
                     <FAQClient faqs={faqsData} />
                 </AnimatedSection>
             </section>
         );
-    } catch (error) {
+    } catch {
         return <div className="p-8 text-center text-red-500">Failed to load FAQ section</div>;
     }
 }

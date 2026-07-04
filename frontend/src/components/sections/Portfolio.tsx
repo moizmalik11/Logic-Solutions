@@ -13,14 +13,14 @@ export default async function Portfolio() {
         }
 
         return (
-            <section id="portfolio" className="py-12 md:py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-800">
-                <AnimatedSection className="max-w-7xl mx-auto">
+            <section id="portfolio" className="py-12 lg:py-16 bg-transparent relative">
+                <AnimatedSection className="max-w-7xl mx-auto px-5 lg:px-8">
                     <SectionHeader title="Our Work" subtitle="Explore our latest projects" />
                     <PortfolioClient items={portfolioData} />
                 </AnimatedSection>
             </section>
         );
-    } catch (error) {
+    } catch {
         return <div className="p-8 text-center text-red-500">Failed to load Portfolio section</div>;
     }
 }
