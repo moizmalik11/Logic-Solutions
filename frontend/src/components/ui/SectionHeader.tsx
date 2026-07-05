@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 interface SectionHeaderProps {
     title: string;
@@ -11,7 +11,7 @@ interface SectionHeaderProps {
 
 export const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle, className = '' }) => {
     // Container for staggering characters
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -23,7 +23,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle, c
     };
 
     // Each character's typing animation
-    const charVariants = {
+    const charVariants: Variants = {
         hidden: { opacity: 0, y: 15, filter: 'blur(4px)' },
         visible: { 
             opacity: 1, 
@@ -38,7 +38,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({ title, subtitle, c
     };
 
     // Subtitle fade-in animation
-    const subtitleVariants = {
+    const subtitleVariants: Variants = {
         hidden: { opacity: 0, y: 20, filter: 'blur(4px)' },
         visible: { 
             opacity: 1, 
