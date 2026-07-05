@@ -2,6 +2,11 @@
 
 A high-performance corporate landing website built with a modern decoupled stack: a **Next.js 14 (App Router)** frontend and a **Laravel 12 (PHP 8.2+)** RESTful API backend. Engineered for visual excellence, modern typography, responsive fluid animations, robust database-driven content, and optimized SEO structure.
 
+**Live Deployment URLs (Bonus):**
+*   **Frontend (Vercel)**: https://logic-solutions.vercel.app/
+*   **Backend API (Railway)**: https://logic-solutions-production.up.railway.app/
+*   **GitHub Repository**: https://github.com/moizmalik11/Logic-Solutions.git
+
 ---
 
 ## 1. Project Overview
@@ -118,6 +123,25 @@ npm run dev
 
 All resources respond in a standard consistent JSON envelope:
 `{ "success": boolean, "message": string, "errors": null|object, "data": null|object|array }`
+
+**Example Response (GET /api/hero):**
+```json
+{
+  "success": true,
+  "message": "Hero data retrieved successfully.",
+  "errors": null,
+  "data": {
+    "title": "Where Logic Meets Innovation.",
+    "subtitle": "We design, build, and scale websites...",
+    "cta_text": "Start Your Project",
+    "cta_url": "#contact",
+    "background_image": "https://logic-solutions-production.up.railway.app/storage/images/unsplash_1504384308090-c894fdcc538d.jpg",
+    "video_url": "https://logic-solutions-production.up.railway.app/storage/hero_video_compressed.mp4",
+    "poster_url": "https://logic-solutions-production.up.railway.app/storage/images/hero_poster.jpg",
+    "is_active": 1
+  }
+}
+```
 
 ### Public Endpoints (No Auth Required)
 *   `GET /api/hero`: Fetches active Hero slide configuration.

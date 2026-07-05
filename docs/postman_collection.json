@@ -11,6 +11,11 @@
             "type": "string"
         },
         {
+            "key": "production_url",
+            "value": "https://logic-solutions-production.up.railway.app/api",
+            "type": "string"
+        },
+        {
             "key": "admin_token",
             "value": "your_admin_token_here",
             "type": "string"
