@@ -17,6 +17,14 @@ const nextConfig = {
             {
                 protocol: 'http',
                 hostname: 'localhost',
+            },
+            {
+                protocol: 'https',
+                hostname: 'logic-solutions-production.up.railway.app',
+            },
+            {
+                protocol: 'https',
+                hostname: '*.up.railway.app',
             }
         ],
     },
