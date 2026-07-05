@@ -201,15 +201,35 @@ npm run start
 
 ---
 
-## 10. SEO & Technical Architecture
-1.  **Admin Auth**: Authentication is handled via Laravel Sanctum. Admins can log in via `/api/login` to retrieve an access token. All CRUD operations require the `Authorization: Bearer <token>` header.
-2.  **SEO Setup**: The Next.js frontend uses App Router's `generateMetadata` for dynamic SEO, JSON-LD structured data for Organization schema, canonical URLs, and dynamic `sitemap.ts` and `robots.ts` for search engine crawling.
-3.  **External Image Hosting**: Portfolio items are seeded with official high-speed Unsplash CDN image URLs, removing large binary blobs from storage.
-4.  **Variable Fonts**: The word reveal scroll trigger assumes standard Next.js Google font weights are loaded dynamically, easing cleanly from weight `300` to `700`.
+## 10. Deployment Steps
+
+To deploy this decoupled architecture to a live environment, we recommend **Vercel** for the Next.js frontend and **Railway** for the Laravel backend.
+
+### Backend (Railway)
+1. Push your repository to GitHub.
+2. In Railway, provision a MySQL Database and note the connection credentials.
+3. Import the GitHub repository in Railway and set the **Root Directory** to `/backend`.
+4. Update the Railway Environment Variables with your `DB_*` credentials, `APP_KEY`, `APP_ENV=production`, and `FRONTEND_URL`.
+5. Railway will automatically build and serve the Laravel application. Run migrations using the Railway CLI (`railway run php artisan migrate --force`).
+
+### Frontend (Vercel)
+1. Import the repository into Vercel.
+2. Set the **Root Directory** to `frontend`. The framework preset will automatically detect Next.js.
+3. Add the Environment Variable: `NEXT_PUBLIC_API_URL` pointing to the live Railway backend domain.
+4. Deploy the application. Vercel will automatically build the static assets and host the application globally.
 
 ---
 
-## 11. Known Issues
+## 11. Assumptions
 
-*   **Hero Video File Size**: The raw video background asset [`frontend/public/hero_video.mov`](file:///e:/Projects/Assesment Project Moiz Ahmed/frontend/public/hero_video.mov) is **198 MB**. It has been excluded and kept unstaged from Git commits to prevent pushing errors on GitHub (GitHub blocks pushes containing files > 100 MB).
+The following design and architecture decisions were made to handle ambiguities in the spec:
+1. **Admin Auth Scope**: It was assumed that the backend API will handle Admin CRUD operations securely using Laravel Sanctum. A full frontend Admin dashboard was not built as the requirement was to "Build a Modern SEO-Friendly Company Landing Website," so the admin functionality is exposed strictly via the API to be consumed by any future CMS/Dashboard.
+2. **SEO Setup**: It was assumed that metadata should be dynamically injected into the `layout.tsx` (using Next.js App Router conventions) and that JSON-LD structured data is required for the Organization schema.
+3. **External Image Hosting**: To keep the repo lightweight, Portfolio items are seeded with official high-speed Unsplash CDN image URLs instead of locally stored binaries.
+
+---
+
+## 12. Known Issues
+
+*   **Hero Video File Size**: The raw video background asset `frontend/public/hero_video.mov` is over 100 MB. It has been excluded and kept unstaged from Git commits to prevent pushing errors on GitHub.
     *   *Workaround*: In a live deployment, compress this file to a web-optimized MP4 (usually 5–15 MB) using Handbrake or ffmpeg before staging, or host it on an external CDN.
