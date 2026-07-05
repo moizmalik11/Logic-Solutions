@@ -39,22 +39,22 @@ export default function HeroVideo({ videoUrl, posterUrl }: { videoUrl?: string, 
             </div>
 
             {/* Video — fades in once playing */}
-            {!videoError && (
-                <video
-                    ref={videoRef}
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                        videoLoaded ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    src={videoUrl || '/hero_video.mp4'}
-                    muted
-                    loop
-                    playsInline
-                    autoPlay
-                    preload="auto"
-                    onPlaying={() => setVideoLoaded(true)}
-                    onError={() => setVideoError(true)}
-                />
-            )}
+            <video
+                ref={videoRef}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                    videoLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
+                src={videoError ? '/hero_video.mp4' : (videoUrl ? videoUrl.replace('.webm', '.mp4') : '/hero_video.mp4')}
+                muted
+                loop
+                playsInline
+                autoPlay
+                preload="auto"
+                onPlaying={() => setVideoLoaded(true)}
+                onError={() => {
+                    if (!videoError) setVideoError(true);
+                }}
+            />
 
             {/* Dark overlay — tones down video so text stays readable */}
             <div className="absolute inset-0 bg-black/50 dark:bg-black/60" />
