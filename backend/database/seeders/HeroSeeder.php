@@ -10,7 +10,7 @@ class HeroSeeder extends Seeder {
             'cta_text' => 'Start Your Project',
             'cta_url' => '#contact',
             'background_image' => 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop',
-            'video_url' => '/hero_video.mp4',
+            'video_url' => 'http://127.0.0.1:8000/storage/hero_video_compressed.mp4',
             'poster_url' => '/hero_poster.jpg',
             'is_active' => true,
             'created_at' => now(),
