@@ -88,9 +88,47 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\\n  \"name\": \"John Doe\",\\n  \"email\": \"john@example.com\",\\n  \"phone\": \"123-456-7890\",\\n  \"subject\": \"Inquiry\",\\n  \"message\": \"Hello!\"\\n}"
+                            "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"123-456-7890\",\n  \"subject\": \"Inquiry\",\n  \"message\": \"Hello!\"\n}"
                         },
                         "url": "{{base_url}}/contact"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Auth API",
+            "item": [
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"admin@logicsolution.com\",\n  \"password\": \"password\"\n}"
+                        },
+                        "url": "{{base_url}}/login"
+                    }
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{admin_token}}"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "url": "{{base_url}}/logout"
                     }
                 }
             ]
@@ -151,7 +189,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\\n  \"title\": \"New Title\",\\n  \"subtitle\": \"New Subtitle\",\\n  \"is_active\": true\\n}"
+                            "raw": "{\n  \"title\": \"New Title\",\n  \"subtitle\": \"New Subtitle\",\n  \"is_active\": true\n}"
                         },
                         "url": "{{base_url}}/hero"
                     }
