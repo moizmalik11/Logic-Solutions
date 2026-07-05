@@ -53,9 +53,9 @@ export default async function Hero() {
                     <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-5">
                         <a
                             href={heroData.cta_url || '#contact'}
-                            className="group relative inline-flex items-center gap-3 bg-white text-black px-7 py-3.5 rounded-full font-semibold text-sm tracking-wide hover:bg-white/95 transition-all overflow-hidden shadow-md shadow-white/5 hover:scale-[1.01] duration-300"
+                            className="group relative inline-flex items-center gap-3 bg-white text-black dark:bg-black dark:text-white dark:border dark:border-black px-7 py-3.5 rounded-full font-semibold text-sm tracking-wide hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-all overflow-hidden shadow-md shadow-white/5 dark:shadow-black/10 hover:scale-[1.01] duration-300"
                         >
-                            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-black/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-black/5 dark:via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                             <span>{heroData.cta_text || 'Start a Project'}</span>
                             <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
