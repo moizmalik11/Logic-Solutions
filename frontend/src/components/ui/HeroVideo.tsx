@@ -39,7 +39,7 @@ export default function HeroVideo({ videoUrl, posterUrl }: { videoUrl?: string, 
             video.removeEventListener('playing', handlePlaying);
             video.removeEventListener('error', handleError);
         };
-    }, []);
+    }, [videoUrl]);
 
     return (
         <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -49,14 +49,18 @@ export default function HeroVideo({ videoUrl, posterUrl }: { videoUrl?: string, 
                     videoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'
                 }`}
             >
-                <Image
-                    src={posterUrl || "/hero_poster.jpg"}
-                    alt="Hero background"
-                    fill
-                    priority
-                    className="object-cover"
-                    sizes="100vw"
-                />
+                {posterUrl ? (
+                    <Image
+                        src={posterUrl}
+                        alt="Hero background"
+                        fill
+                        priority
+                        className="object-cover"
+                        sizes="100vw"
+                    />
+                ) : (
+                    <div className="absolute inset-0 bg-black" />
+                )}
             </div>
 
             {/* Video — fades in once playing */}

@@ -3,7 +3,7 @@ import React from 'react';
 export default function Footer() {
     return (
         <footer className="relative z-10 pt-16 pb-8 border-t border-light-border/40 dark:border-dark-border/40 bg-light-surface/30 dark:bg-dark-surface/30 backdrop-blur-md">
-            <div className="max-w-7xl mx-auto px-5 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 mb-16">
+            <div className="max-w-7xl mx-auto px-5 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-16">
                 
                 {/* Column 1: Logo & Text */}
                 <div className="lg:col-span-1">
@@ -23,35 +23,24 @@ export default function Footer() {
                 <div>
                     <h4 className="text-lg font-semibold text-light-text dark:text-dark-text mb-6">Quick Links</h4>
                     <ul className="flex flex-col gap-3 text-sm text-light-textMuted dark:text-dark-textMuted">
-                        <li><a href="#" className="hover:text-brand-wood transition-colors">Home</a></li>
+                        <li><a href="#hero" className="hover:text-brand-wood transition-colors">Home</a></li>
                         <li><a href="#about" className="hover:text-brand-wood transition-colors">About</a></li>
-                        <li><a href="#services" className="hover:text-brand-wood transition-colors">Industries</a></li>
-                        <li><a href="#team" className="hover:text-brand-wood transition-colors">Careers</a></li>
-                        <li><a href="#" className="hover:text-brand-wood transition-colors">Privacy & Policy</a></li>
+                        <li><a href="#services" className="hover:text-brand-wood transition-colors">Services</a></li>
+                        <li><a href="#portfolio" className="hover:text-brand-wood transition-colors">Portfolio</a></li>
+                        <li><a href="#team" className="hover:text-brand-wood transition-colors">Team</a></li>
                         <li><a href="#contact" className="hover:text-brand-wood transition-colors">Contact Us</a></li>
                     </ul>
                 </div>
 
-                {/* Column 3: Products & Blogs */}
-                <div>
-                    <h4 className="text-lg font-semibold text-light-text dark:text-dark-text mb-6">Products</h4>
-                    <ul className="flex flex-col gap-3 text-sm text-light-textMuted dark:text-dark-textMuted mb-8">
-                        <li><a href="#" className="hover:text-brand-wood transition-colors">Byte Bots</a></li>
-                        <li><a href="#" className="hover:text-brand-wood transition-colors">Byte Suites</a></li>
-                    </ul>
-
-                    <h4 className="text-lg font-semibold text-light-text dark:text-dark-text mb-6">Blogs</h4>
-                </div>
-
-                {/* Column 4: Services */}
+                {/* Column 3: Services */}
                 <div>
                     <h4 className="text-lg font-semibold text-light-text dark:text-dark-text mb-6">Services</h4>
                     <ul className="flex flex-col gap-3 text-sm text-light-textMuted dark:text-dark-textMuted">
-                        <li><a href="#" className="hover:text-brand-wood transition-colors">Web Development</a></li>
-                        <li><a href="#" className="hover:text-brand-wood transition-colors">SEO</a></li>
-                        <li><a href="#" className="hover:text-brand-wood transition-colors">App Development</a></li>
-                        <li><a href="#" className="hover:text-brand-wood transition-colors">Marketing</a></li>
-                        <li><a href="#" className="hover:text-brand-wood transition-colors">Advanced Services</a></li>
+                        <li><a href="#services" className="hover:text-brand-wood transition-colors">Web Development</a></li>
+                        <li><a href="#services" className="hover:text-brand-wood transition-colors">SEO</a></li>
+                        <li><a href="#services" className="hover:text-brand-wood transition-colors">App Development</a></li>
+                        <li><a href="#services" className="hover:text-brand-wood transition-colors">Marketing</a></li>
+                        <li><a href="#services" className="hover:text-brand-wood transition-colors">Advanced Services</a></li>
                     </ul>
                 </div>
 

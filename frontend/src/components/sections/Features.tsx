@@ -57,7 +57,7 @@ export default async function Features() {
         }
 
         return (
-            <section id="features" className="py-12 lg:py-16 bg-transparent border-t border-light-border/20 dark:border-dark-border/20">
+            <section id="features" className="py-16 lg:py-24 bg-transparent border-t border-light-border/20 dark:border-dark-border/20">
                 <AnimatedSection className="max-w-7xl mx-auto px-5 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                         

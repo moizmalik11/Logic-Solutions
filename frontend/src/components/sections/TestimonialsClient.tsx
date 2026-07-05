@@ -1,35 +1,54 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Testimonial } from '../../types';
 import Image from 'next/image';
 
 export default function TestimonialsClient({ items }: { items: Testimonial[] }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
 
-    const handlePrev = () => {
+    const handlePrev = useCallback(() => {
         if (isAnimating) return;
         setIsAnimating(true);
         setTimeout(() => {
             setCurrentIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
             setIsAnimating(false);
         }, 300);
-    };
+    }, [isAnimating, items.length]);
 
-    const handleNext = () => {
+    const handleNext = useCallback(() => {
         if (isAnimating) return;
         setIsAnimating(true);
         setTimeout(() => {
             setCurrentIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
             setIsAnimating(false);
         }, 300);
-    };
+    }, [isAnimating, items.length]);
+
+    // Auto-scroll functionality
+    useEffect(() => {
+        if (isHovered) return;
+        
+        const timer = setInterval(() => {
+            handleNext();
+        }, 5000); // Auto-change every 5 seconds
+
+        return () => clearInterval(timer);
+    }, [handleNext, isHovered]);
+
+    if (!items || items.length === 0) return null;
 
     const current = items[currentIndex];
 
     return (
-        <section id="testimonials" className="py-12 lg:py-16 bg-transparent border-t border-light-border/20 dark:border-dark-border/20">
+        <section 
+            id="testimonials" 
+            className="py-16 lg:py-24 bg-transparent border-t border-light-border/20 dark:border-dark-border/20"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
             <div className="max-w-4xl mx-auto px-5 lg:px-8 text-center relative">
                 <span className="eyebrow block mb-6">
                     Client Success
@@ -87,14 +106,14 @@ export default function TestimonialsClient({ items }: { items: Testimonial[] }) 
                         aria-label="Previous testimonial"
                         className="w-12 h-12 rounded-full border border-light-border/60 dark:border-dark-border/60 flex items-center justify-center text-light-textMuted dark:text-dark-textMuted hover:border-brand-wood hover:text-brand-wood hover:bg-brand-wood/5 transition-all active:scale-95"
                     >
-                        &larr;
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
                     </button>
                     <button
                         onClick={handleNext}
                         aria-label="Next testimonial"
                         className="w-12 h-12 rounded-full border border-light-border/60 dark:border-dark-border/60 flex items-center justify-center text-light-textMuted dark:text-dark-textMuted hover:border-brand-wood hover:text-brand-wood hover:bg-brand-wood/5 transition-all active:scale-95"
                     >
-                        &rarr;
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
                     </button>
                 </div>
             </div>

@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 interface AboutData {
     title: string;
@@ -43,7 +42,6 @@ export default function AboutClient({ data }: { data: AboutData }) {
     return (
         <section 
             ref={sectionRef} 
-            id="about" 
             className="h-screen bg-transparent relative overflow-hidden flex flex-col items-center justify-center w-full"
         >
             
@@ -53,27 +51,17 @@ export default function AboutClient({ data }: { data: AboutData }) {
 
             {/* Glowing 'Logic' Signature Path spanning full viewport width */}
             <svg 
-                className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-[400px] pointer-events-none z-0" 
+                className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-[400px] pointer-events-none z-20" 
                 viewBox="0 0 1000 300" 
                 preserveAspectRatio="none"
             >
                 <defs>
                   <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#F59E0B" />
-                    <stop offset="35%" stopColor="#FBBF24" />
-                    <stop offset="70%" stopColor="#F59E0B" />
-                    <stop offset="100%" stopColor="#D97706" />
+                    <stop offset="0%" stopColor="#7A4822" />
+                    <stop offset="35%" stopColor="#965C31" />
+                    <stop offset="70%" stopColor="#b57540" />
+                    <stop offset="100%" stopColor="#965C31" />
                   </linearGradient>
-                  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="5" result="blur" />
-                    <feComponentTransfer in="blur" result="glow1">
-                      <feFuncA type="linear" slope="0.8" />
-                    </feComponentTransfer>
-                    <feMerge>
-                      <feMergeNode in="glow1" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
                 </defs>
 
                 {/* Custom continuous cursive path for "Logic" with entry and exit tails spanning from 0 to 1000 */}
@@ -107,20 +95,19 @@ export default function AboutClient({ data }: { data: AboutData }) {
                     "
                     fill="none" 
                     stroke="url(#goldGradient)"
-                    strokeWidth="3.5" 
+                    strokeWidth="6" 
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    filter="url(#glow)"
                     style={{ transform: 'rotate(-1.5deg)', transformOrigin: 'center' }}
                 />
                 {/* Dot for 'i' (appears when drawn) */}
-                <circle ref={dotRef} id="about-brush-dot" cx="625" cy="70" r="4.5" fill="#FBBF24" filter="url(#glow)" />
+                <circle ref={dotRef} id="about-brush-dot" cx="625" cy="70" r="5" fill="#965C31" />
             </svg>
 
             <div className="max-w-5xl mx-auto px-6 relative z-10 w-full flex flex-col justify-center h-full">
                 
                 {/* Title */}
-                <h2 className="text-3xl md:text-5xl font-bold text-zinc-950 dark:text-white mb-10 text-center transition-colors">
+                <h2 className="heading-lg mb-10 text-center transition-colors">
                     {data.title || "About Us"}
                 </h2>
                 
@@ -128,7 +115,7 @@ export default function AboutClient({ data }: { data: AboutData }) {
                 <div className="relative">
                     
                     {/* Paragraph with word-by-word reveal */}
-                    <p ref={textRef} className="text-lg md:text-xl lg:text-2xl leading-[1.7] md:leading-[1.8] text-left font-sans font-light tracking-wide select-none relative z-10 max-w-4xl mx-auto transition-colors">
+                    <p ref={textRef} className="body-lg text-left select-none relative z-10 max-w-4xl mx-auto transition-colors">
                         {words}
                     </p>
                 </div>

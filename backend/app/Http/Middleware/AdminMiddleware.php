@@ -12,7 +12,7 @@ class AdminMiddleware
     {
         // Simple token check if sanctum is not fully configured, 
         // or expecting auth:sanctum to handle it first.
-        if (!auth()->check()) {
+        if (!auth('sanctum')->check()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Unauthorized Access.',

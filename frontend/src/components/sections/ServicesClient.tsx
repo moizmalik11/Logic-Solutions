@@ -79,7 +79,7 @@ export default function ServicesClient({ items }: { items: Service[] }) {
     };
 
     return (
-        <section id="services" className="py-12 lg:py-16 bg-transparent border-t border-light-border/20 dark:border-dark-border/20 overflow-hidden w-full transition-all">
+        <section id="services" className="py-16 lg:py-24 bg-transparent border-t border-light-border/20 dark:border-dark-border/20 overflow-hidden w-full transition-all">
             {/* Custom CSS to hide scrollbars completely */}
             <style jsx>{`
                 .hide-scrollbar::-webkit-scrollbar {
@@ -105,13 +105,13 @@ export default function ServicesClient({ items }: { items: Service[] }) {
                 
                 {/* Header Row: Same-size title block (Top = Black, Bottom = Grey) */}
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-10 border-b border-light-border/10 dark:border-dark-border/10 pb-6">
-                    <div className="space-y-1 flex flex-col items-start">
-                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white uppercase leading-none">
+                    <div className="space-y-2 flex flex-col items-start">
+                        <span className="eyebrow block">
                             What We Do
-                        </h2>
-                        <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-zinc-400 dark:text-zinc-500 leading-none">
+                        </span>
+                        <h2 className="heading-xl">
                             Our Services.
-                        </h3>
+                        </h2>
                     </div>
                 </div>
 
@@ -175,11 +175,11 @@ export default function ServicesClient({ items }: { items: Service[] }) {
                                     {/* Card Content: Visible by default, fades out on hover */}
                                     <div className="absolute inset-0 z-20 p-8 flex flex-col justify-center items-center text-center transition-all duration-500 ease-in-out opacity-100 group-hover:opacity-0 group-hover:scale-95">
                                         {/* Card Title using dynamic Brand wood/accent colors */}
-                                        <h3 className="text-xl md:text-2xl font-bold text-brand-wood dark:text-brand-wood mb-4 tracking-tight drop-shadow-sm">
+                                        <h3 className="heading-md text-brand-wood dark:text-brand-wood mb-4 tracking-tight drop-shadow-sm">
                                             {service.title}
                                         </h3>
                                         {/* Description */}
-                                        <p className="text-sm md:text-base text-zinc-100/90 dark:text-zinc-200/90 leading-relaxed font-light drop-shadow">
+                                        <p className="body-base text-zinc-100/90 dark:text-zinc-200/90 drop-shadow">
                                             {service.description.length > 95
                                                 ? `${service.description.substring(0, 95)}...`
                                                 : service.description}

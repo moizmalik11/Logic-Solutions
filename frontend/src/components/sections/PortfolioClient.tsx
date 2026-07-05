@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Portfolio } from '../../types';
 import Image from 'next/image';
 import gsap from 'gsap';
@@ -15,37 +15,8 @@ export default function PortfolioClient({ items }: { items: Portfolio[] }) {
     const activeItem = items[currentIndex];
     const activeImage = activeItem.image;
 
-    // Auto-play setup
-    useEffect(() => {
-        if (isAutoplayPaused) {
-            if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
-            return;
-        }
-
-        autoplayTimerRef.current = setInterval(() => {
-            handleNext();
-        }, 5000); // Rotate every 5 seconds
-
-        return () => {
-            if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
-        };
-    }, [currentIndex, isAutoplayPaused, items.length]);
-
-    const handleNext = () => {
-        animateSlideChange((currentIndex + 1) % items.length);
-    };
-
-    const handlePrev = () => {
-        animateSlideChange((currentIndex - 1 + items.length) % items.length);
-    };
-
-    const handleDotClick = (index: number) => {
-        if (index === currentIndex) return;
-        animateSlideChange(index);
-    };
-
     // GSAP Slider Transition Animation
-    const animateSlideChange = (nextIndex: number) => {
+    const animateSlideChange = useCallback((nextIndex: number) => {
         const textElements = textContainerRef.current?.children;
         const imageElement = imageContainerRef.current?.querySelector('.project-img');
         const overlayElement = imageContainerRef.current?.querySelector('.project-overlay');
@@ -111,7 +82,36 @@ export default function PortfolioClient({ items }: { items: Portfolio[] }) {
                 });
             }
         });
-    };
+    }, []);
+
+    const handleNext = useCallback(() => {
+        animateSlideChange((currentIndex + 1) % items.length);
+    }, [currentIndex, items.length, animateSlideChange]);
+
+    const handlePrev = useCallback(() => {
+        animateSlideChange((currentIndex - 1 + items.length) % items.length);
+    }, [currentIndex, items.length, animateSlideChange]);
+
+    const handleDotClick = useCallback((index: number) => {
+        if (index === currentIndex) return;
+        animateSlideChange(index);
+    }, [currentIndex, animateSlideChange]);
+
+    // Auto-play setup
+    useEffect(() => {
+        if (isAutoplayPaused) {
+            if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
+            return;
+        }
+
+        autoplayTimerRef.current = setInterval(() => {
+            handleNext();
+        }, 5000); // Rotate every 5 seconds
+
+        return () => {
+            if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
+        };
+    }, [isAutoplayPaused, handleNext]);
 
     if (!items || items.length === 0) {
         return (

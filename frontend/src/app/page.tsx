@@ -79,16 +79,27 @@ export default async function Home() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+
+        {/* Anchor point for Home (Top of page) */}
+        <div id="hero" className="absolute top-0 w-full h-px pointer-events-none" />
+
+        {/* Anchor point for About. 
+            HeroShutter pins for 500vh. The Hero slides up by 1.2 in a 5.0 timeline. 
+            (1.2/5.0) * 500 = 120vh. 
+        */}
+        <div id="about" className="absolute top-[120vh] w-full h-px pointer-events-none" />
+
         <HeroShutter hero={<Hero />}>
           <About />
-          <Services />
-          <Features />
-          <Portfolio />
-          <Testimonials />
-          <Team />
-          <FAQ />
-          <Contact />
         </HeroShutter>
+        
+        <Services />
+        <Features />
+        <Portfolio />
+        <Testimonials />
+        <Team />
+        <FAQ />
+        <Contact />
       </main>
       <Footer />
     </>

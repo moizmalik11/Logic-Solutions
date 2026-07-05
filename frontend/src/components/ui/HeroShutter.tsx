@@ -22,9 +22,9 @@ export default function HeroShutter({ hero, children }: { hero: React.ReactNode;
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top top",
-                    end: "+=500%", // Larger scroll distance for slower, controlled speed
+                    end: "+=600%", // Increased scroll distance for slower, controlled speed
                     pin: true,
-                    scrub: 1.5, // Smooth but responsive lag time
+                    scrub: 2.5, // Increased lag time for a smoother, slower fluid feel
                     pinSpacing: true,
                 }
             });
@@ -45,13 +45,13 @@ export default function HeroShutter({ hero, children }: { hero: React.ReactNode;
                 tl.to(words, {
                     opacity: 1,
                     fontWeight: '700',
-                    stagger: 0.08, // Wider spacing between starts
-                    duration: 0.2, // Very short individual duration = snaps one-by-one, no swipe!
+                    stagger: 0.08, 
+                    duration: 0.2, 
                     ease: 'power1.out',
                 }, 1.2);
             }
 
-            // ── Phase 3 (2.5 -> 4.8): Calligraphy line draws (starts after words are underway)
+            // ── Phase 3 (2.5 -> 6.0): Calligraphy line draws (Starts mid-way through words, lasts longer)
             if (path) {
                 const pathLen = path.getTotalLength() || 2500;
                 gsap.set(path, { strokeDasharray: pathLen, strokeDashoffset: pathLen });
@@ -59,11 +59,11 @@ export default function HeroShutter({ hero, children }: { hero: React.ReactNode;
                 tl.to(path, {
                     strokeDashoffset: 0,
                     ease: 'power2.inOut',
-                    duration: 2.3,
+                    duration: 3.5, // Increased duration for a slower draw
                 }, 2.5);
             }
 
-            // ── Phase 4 (4.8 -> 5.0): Dot pops in
+            // ── Phase 4 (6.0 -> 6.2): Dot pops in at the very end
             if (dot) {
                 gsap.set(dot, { opacity: 0, scale: 0, transformOrigin: 'center' });
                 tl.to(dot, {
@@ -71,7 +71,7 @@ export default function HeroShutter({ hero, children }: { hero: React.ReactNode;
                     scale: 1,
                     ease: 'back.out(2.2)',
                     duration: 0.2,
-                }, 4.8);
+                }, 6.0);
             }
         }
 

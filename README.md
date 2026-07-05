@@ -131,8 +131,14 @@ All resources respond in a standard consistent JSON envelope:
 *   `POST /api/contact` **(Rate Limited)**: Submits client inquiry. Limits to **5 submissions per minute** per IP.
     *   *Request Body*: `{ "name": "...", "email": "...", "phone": "...", "subject": "...", "message": "..." }`
 
-### Protected Endpoints (Admin Middleware Required)
-Requires a valid admin login session or authorization token.
+### Auth Endpoints (Sanctum)
+*   `POST /api/login`: Authenticates an admin and returns a Sanctum access token.
+    *   *Request Body*: `{ "email": "admin@logicsolution.com", "password": "password" }`
+*   `POST /api/logout` **(Protected)**: Revokes the current admin token.
+*   `GET /api/user` **(Protected)**: Retrieves the authenticated admin profile.
+
+### Protected Endpoints (Sanctum Auth Required)
+Requires a valid admin login session or authorization token sent as `Authorization: Bearer <token>`.
 *   `POST /api/{resource}`: Creates a new record for a section.
 *   `PUT /api/{resource}/{id}`: Updates a record.
 *   `DELETE /api/{resource}/{id}`: Deletes a record.
@@ -195,11 +201,11 @@ npm run start
 
 ---
 
-## 10. Assumptions & System Notes
-
-1.  **Admin Auth Check**: The `AdminMiddleware` uses `auth()->check()` to lock mutation endpoints. It assumes a cookie-based SPA session or header-based Sanctum authentication token is sent by the calling admin dashboard client.
-2.  **External Image Hosting**: Portfolio items are seeded with official high-speed Unsplash CDN image URLs, removing large binary blobs from storage.
-3.  **Variable Fonts**: The word reveal scroll trigger assumes standard Next.js Google font weights are loaded dynamically, easing cleanly from weight `300` to `700`.
+## 10. SEO & Technical Architecture
+1.  **Admin Auth**: Authentication is handled via Laravel Sanctum. Admins can log in via `/api/login` to retrieve an access token. All CRUD operations require the `Authorization: Bearer <token>` header.
+2.  **SEO Setup**: The Next.js frontend uses App Router's `generateMetadata` for dynamic SEO, JSON-LD structured data for Organization schema, canonical URLs, and dynamic `sitemap.ts` and `robots.ts` for search engine crawling.
+3.  **External Image Hosting**: Portfolio items are seeded with official high-speed Unsplash CDN image URLs, removing large binary blobs from storage.
+4.  **Variable Fonts**: The word reveal scroll trigger assumes standard Next.js Google font weights are loaded dynamically, easing cleanly from weight `300` to `700`.
 
 ---
 

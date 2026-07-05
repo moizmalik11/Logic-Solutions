@@ -13,7 +13,7 @@ export default async function FAQ() {
         }
 
         return (
-            <section id="faq" className="py-12 lg:py-16 bg-transparent relative">
+            <section id="faq" className="py-16 lg:py-24 bg-transparent relative">
                 <AnimatedSection className="max-w-7xl mx-auto px-5 lg:px-8">
                     <SectionHeader title="Frequently Asked Questions" subtitle="Find answers to common questions" />
                     <FAQClient faqs={faqsData} />

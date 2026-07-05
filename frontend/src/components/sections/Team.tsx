@@ -16,7 +16,7 @@ export default async function Team() {
         const sortedTeam = [...teamData].sort((a, b) => a.sort_order - b.sort_order);
 
         return (
-            <section id="team" className="py-12 lg:py-16 bg-transparent border-t border-light-border/20 dark:border-dark-border/20">
+            <section id="team" className="py-16 lg:py-24 bg-transparent border-t border-light-border/20 dark:border-dark-border/20">
                 <AnimatedSection className="max-w-7xl mx-auto px-5 lg:px-8">
                     <SectionHeader title="Meet Our Team" subtitle="The passionate people behind our success" />
                     

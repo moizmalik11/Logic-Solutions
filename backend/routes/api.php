@@ -14,11 +14,17 @@ use App\Http\Controllers\Api\ContactController;
 
 
 
+use App\Http\Controllers\Api\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
 */
+
+// Auth Routes
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('admin');
 
 // Public routes
 Route::get('/hero', [HeroController::class, 'show']);

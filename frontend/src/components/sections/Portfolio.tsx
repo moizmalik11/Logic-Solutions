@@ -13,7 +13,7 @@ export default async function Portfolio() {
         }
 
         return (
-            <section id="portfolio" className="py-12 lg:py-16 bg-transparent relative">
+            <section id="portfolio" className="py-16 lg:py-24 bg-transparent relative">
                 <AnimatedSection className="max-w-7xl mx-auto px-5 lg:px-8">
                     <SectionHeader title="Our Work" subtitle="Explore our latest projects" />
                     <PortfolioClient items={portfolioData} />

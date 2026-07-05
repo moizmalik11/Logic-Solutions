@@ -61,7 +61,7 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="py-12 lg:py-16 bg-transparent border-t border-light-border/20 dark:border-dark-border/20">
+        <section id="contact" className="py-16 lg:py-24 bg-transparent border-t border-light-border/20 dark:border-dark-border/20">
             <AnimatedSection className="max-w-7xl mx-auto px-5 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                     
@@ -71,10 +71,10 @@ export default function Contact() {
                             <span className="eyebrow block">
                                 Let&apos;s Connect
                             </span>
-                            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white leading-[1.15] text-balance">
+                            <h2 className="heading-xl text-balance">
                                 Start Your Next Project.
                             </h2>
-                            <p className="text-base md:text-lg font-light text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-md">
+                            <p className="body-lg max-w-md">
                                 Have an idea or project in mind? Reach out and let&apos;s build something exceptional together.
                             </p>
                         </div>

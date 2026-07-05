@@ -12,7 +12,6 @@ export default async function Hero() {
 
         return (
             <section
-                id="hero"
                 className="relative h-screen flex flex-col justify-center overflow-hidden bg-black"
             >
                 {/* ── Video Background (poster → video crossfade) ── */}
