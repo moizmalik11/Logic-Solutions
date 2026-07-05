@@ -1,24 +1,28 @@
 'use client';
 
 import React from 'react';
-import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { motion } from 'framer-motion';
 
 interface AnimatedSectionProps {
     children: React.ReactNode;
     className?: string;
+    delay?: number;
 }
 
-export function AnimatedSection({ children, className = '' }: AnimatedSectionProps) {
-    const { ref, isVisible } = useScrollAnimation(0.1);
-
+export function AnimatedSection({ children, className = '', delay = 0 }: AnimatedSectionProps) {
     return (
-        <div
-            ref={ref}
-            className={`transition-all duration-700 ease-out transform ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            } ${className}`}
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ 
+                duration: 0.8, 
+                ease: [0.21, 0.47, 0.32, 0.98], // Custom smooth easing
+                delay: delay 
+            }}
+            className={className}
         >
             {children}
-        </div>
+        </motion.div>
     );
 }
