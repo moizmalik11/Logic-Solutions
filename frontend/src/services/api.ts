@@ -28,6 +28,7 @@ export async function fetchApi<T>(endpoint: string, options: RequestInit = {}): 
     headers.set('Accept', 'application/json');
 
     const config: RequestInit = {
+        cache: 'no-store',
         ...options,
         headers,
     };
