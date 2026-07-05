@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   title: "LogicSolution — Web, Mobile & AI Development Agency",
   description: "LogicSolution builds custom websites, mobile apps, and AI-powered products for startups and businesses worldwide. Where logic meets innovation, one product at a time.",
   keywords: "web development agency, mobile app development, AI development company, custom software development, SaaS development, Laravel development, Next.js development",
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+  },
   alternates: {
     canonical: '/',
   },
@@ -59,7 +63,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <GlobalBackground />
           <div className="relative z-0">
             {children}

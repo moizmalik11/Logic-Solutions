@@ -17,37 +17,43 @@ export default function HeroShutter({ hero, children }: { hero: React.ReactNode;
             const path = document.querySelector('#about-brush-path') as SVGPathElement;
             const dot = document.querySelector('#about-brush-dot') as SVGCircleElement;
 
-            // Master Timeline that pins the entire page for smooth coordination
+            // Hint GPU about upcoming animated elements
+            gsap.set(heroRef.current, { willChange: 'transform, opacity', force3D: true });
+            if (path) gsap.set(path, { willChange: 'stroke-dashoffset' });
+
+            // Master Timeline — scrub:1 is the sweet spot: responsive yet smooth
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top top",
-                    end: "+=600%", // Increased scroll distance for slower, controlled speed
+                    end: "+=600%",
                     pin: true,
-                    scrub: 2.5, // Increased lag time for a smoother, slower fluid feel
+                    scrub: 1,
                     pinSpacing: true,
+                    anticipatePin: 1,
                 }
             });
 
-            // ── Phase 1 (0.0 -> 1.2): Hero slides up and fades
+            // ── Phase 1 (0.0 -> 1.2): Hero slides up — GPU-only transforms
             tl.to(heroRef.current, {
                 yPercent: -100,
                 opacity: 0,
                 scale: 0.95,
                 ease: 'power2.inOut',
+                force3D: true,
                 duration: 1.2,
             }, 0);
             
             tl.set(heroRef.current, { pointerEvents: "none" }, 1.2);
 
-            // ── Phase 2 (1.2 -> 3.2): About words reveal word-by-word (snaps word-by-word clearly)
+            // ── Phase 2 (1.2 -> 3.2): Words fade in — opacity only (no layout-triggering props)
             if (words.length > 0) {
                 tl.to(words, {
                     opacity: 1,
-                    fontWeight: '700',
-                    stagger: 0.08, 
-                    duration: 0.2, 
-                    ease: 'power1.out',
+                    stagger: 0.06,
+                    duration: 0.15,
+                    ease: 'none',
+                    force3D: true,
                 }, 1.2);
             }
 

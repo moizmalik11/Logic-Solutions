@@ -21,7 +21,11 @@ export default function AboutClient({ data }: { data: AboutData }) {
 
     // All words are visible but dim (opacity-25) at start, switching colors based on light/dark mode
     const words = cleanedBody.split(' ').map((word, i) => (
-        <span key={i} className="about-word inline-block mr-[0.35em] text-zinc-900 dark:text-white opacity-25">
+        <span
+            key={i}
+            className="about-word inline-block mr-[0.35em] text-zinc-900 dark:text-white opacity-25"
+            style={{ willChange: 'opacity', transform: 'translateZ(0)' }}
+        >
             {word}
         </span>
     ));
@@ -51,9 +55,9 @@ export default function AboutClient({ data }: { data: AboutData }) {
 
             {/* Glowing 'Logic' Signature Path spanning full viewport width */}
             <svg 
-                className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-[400px] pointer-events-none z-20" 
+                className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-[200px] md:h-[400px] pointer-events-none z-20" 
                 viewBox="0 0 1000 300" 
-                preserveAspectRatio="none"
+                preserveAspectRatio="xMidYMid meet"
             >
                 <defs>
                   <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="0%">
