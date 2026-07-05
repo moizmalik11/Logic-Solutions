@@ -4,14 +4,6 @@ import { SectionHeader } from '../ui/SectionHeader';
 import { AnimatedSection } from '../ui/AnimatedSection';
 import Image from 'next/image';
 
-const LOCAL_PHOTOS = [
-    '/images/team_1.png',
-    '/images/team_2.png',
-    '/images/team_3.png',
-    '/images/team_4.png',
-    '/images/team_5.png',
-];
-
 export default async function Team() {
     try {
         const teamData = await getTeamMembers();
@@ -30,8 +22,8 @@ export default async function Team() {
                     
                     {/* Modern Rectangular Photo Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6 mt-10">
-                        {sortedTeam.map((member, idx) => {
-                            const photoSrc = LOCAL_PHOTOS[idx % LOCAL_PHOTOS.length];
+                        {sortedTeam.map((member) => {
+                            const photoSrc = member.photo || '/images/team_default.png';
                             return (
                                 <div key={member.id} className="group flex flex-col bg-transparent">
                                     {/* 4:5 Aspect Ratio Rectangular Portrait */}
@@ -42,6 +34,7 @@ export default async function Team() {
                                             alt={`${member.name} - ${member.role}`} 
                                             fill
                                             className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 250px"
                                         />
                                     </div>
                                     

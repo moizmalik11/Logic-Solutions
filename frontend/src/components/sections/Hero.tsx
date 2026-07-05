@@ -16,7 +16,7 @@ export default async function Hero() {
                 className="relative h-screen flex flex-col justify-center overflow-hidden bg-black"
             >
                 {/* ── Video Background (poster → video crossfade) ── */}
-                <HeroVideo />
+                <HeroVideo videoUrl={heroData.video_url} posterUrl={heroData.poster_url} />
 
                 {/* ── Centered Layout ── */}
                 <div className="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 h-full flex flex-col justify-center items-center text-center">
@@ -28,10 +28,22 @@ export default async function Hero() {
                             lineHeight: 1.1,
                         }}
                     >
-                        <span className="block mb-1 font-light">Where Logic</span>
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-brass via-amber-400 to-brand-brass">
-                            Meets Innovation.
-                        </span>
+                        {(() => {
+                            const titleText = heroData.title || '';
+                            const parts = titleText.split('Meets');
+                            const first = parts[0] ? parts[0].trim() : '';
+                            const second = parts[1] ? 'Meets' + parts[1] : '';
+                            return (
+                                <>
+                                    <span className="block mb-1 font-light">{first}</span>
+                                    {second && (
+                                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-brass via-amber-400 to-brand-brass">
+                                            {second}
+                                        </span>
+                                    )}
+                                </>
+                            );
+                        })()}
                     </h1>
 
                     <p className="mt-6 max-w-xl text-sm md:text-base text-white/80 leading-relaxed font-light mx-auto">

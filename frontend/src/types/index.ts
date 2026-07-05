@@ -5,6 +5,8 @@ export interface Hero {
     cta_text?: string;
     cta_url?: string;
     background_image?: string;
+    video_url?: string;
+    poster_url?: string;
     is_active: boolean;
 }
 

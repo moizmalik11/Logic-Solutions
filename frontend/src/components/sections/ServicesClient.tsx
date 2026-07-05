@@ -103,46 +103,47 @@ export default function ServicesClient({ items }: { items: Service[] }) {
 
             <div className="w-full">
                 
-                {/* Header Row: Flex container aligning title on left and buttons on top-right */}
-                <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex justify-between items-end mb-10 border-b border-light-border/10 dark:border-dark-border/10 pb-6">
-                    <div className="space-y-2">
-                        <span className="eyebrow">
+                {/* Header Row: Same-size title block (Top = Black, Bottom = Grey) */}
+                <div className="max-w-[1400px] mx-auto px-6 md:px-12 mb-10 border-b border-light-border/10 dark:border-dark-border/10 pb-6">
+                    <div className="space-y-1 flex flex-col items-start">
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-zinc-950 dark:text-white uppercase leading-none">
                             What We Do
-                        </span>
-                        <h2 className="heading-lg">
-                            Our Services.
                         </h2>
-                    </div>
-
-                    {/* Top Right Navigation Buttons */}
-                    <div className="flex gap-3">
-                        <button
-                            onClick={() => handleArrowClick('left')}
-                            className="w-11 h-11 bg-white/90 dark:bg-zinc-900/90 text-brand-wood hover:text-white border border-light-border dark:border-dark-border hover:bg-brand-wood dark:hover:bg-brand-wood flex items-center justify-center rounded-full shadow-sm transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-md"
-                            aria-label="Previous service"
-                        >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <button
-                            onClick={() => handleArrowClick('right')}
-                            className="w-11 h-11 bg-white/90 dark:bg-zinc-900/90 text-brand-wood hover:text-white border border-light-border dark:border-dark-border hover:bg-brand-wood dark:hover:bg-brand-wood flex items-center justify-center rounded-full shadow-sm transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-md"
-                            aria-label="Next service"
-                        >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
+                        <h3 className="text-3xl md:text-5xl font-bold tracking-tight text-zinc-400 dark:text-zinc-500 leading-none">
+                            Our Services.
+                        </h3>
                     </div>
                 </div>
 
                 {/* Scroller Area: Breaks out to screen edges */}
                 <div 
-                    className="relative w-full"
+                    className="relative w-full group/scroller"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                 >
+                    
+                    {/* Left Navigation Chevron - White drop-shadowed arrow for maximum visibility */}
+                    <button
+                        onClick={() => handleArrowClick('left')}
+                        className="absolute left-2 md:left-8 top-[calc(50%-8px)] -translate-y-1/2 z-30 text-white/70 hover:text-white transition-all duration-300 p-2 active:scale-95 hover:scale-110 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
+                        aria-label="Previous service"
+                    >
+                        <svg className="w-9 h-9 md:w-12 md:h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    {/* Right Navigation Chevron - White drop-shadowed arrow for maximum visibility */}
+                    <button
+                        onClick={() => handleArrowClick('right')}
+                        className="absolute right-2 md:right-8 top-[calc(50%-8px)] -translate-y-1/2 z-30 text-white/70 hover:text-white transition-all duration-300 p-2 active:scale-95 hover:scale-110 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
+                        aria-label="Next service"
+                    >
+                        <svg className="w-9 h-9 md:w-12 md:h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+
                     {/* Horizontal Scroller Container with hidden scrollbars and responsive calculations */}
                     <div
                         ref={scrollContainerRef}

@@ -16,6 +16,8 @@ class HeroResource extends JsonResource
             'cta_text' => $this->cta_text,
             'cta_url' => $this->cta_url,
             'background_image' => $this->background_image,
+            'video_url' => $this->video_url,
+            'poster_url' => $this->poster_url,
             'is_active' => $this->is_active,
         ];
     }

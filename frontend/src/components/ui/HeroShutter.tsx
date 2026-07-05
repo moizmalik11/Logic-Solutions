@@ -22,56 +22,56 @@ export default function HeroShutter({ hero, children }: { hero: React.ReactNode;
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: "top top",
-                    end: "+=380%", // 100% for Hero slide/fade, 280% for About animations
+                    end: "+=500%", // Larger scroll distance for slower, controlled speed
                     pin: true,
-                    scrub: 2, // Slow, elegant drag feel (feels like painter's brush)
+                    scrub: 1.5, // Smooth but responsive lag time
                     pinSpacing: true,
                 }
             });
 
-            // ── Phase 1 (0.0 -> 1.0): Hero slides up and fades to reveal About underneath
+            // ── Phase 1 (0.0 -> 1.2): Hero slides up and fades
             tl.to(heroRef.current, {
                 yPercent: -100,
                 opacity: 0,
                 scale: 0.95,
-                ease: 'none',
-                duration: 1.0,
+                ease: 'power2.inOut',
+                duration: 1.2,
             }, 0);
             
-            tl.set(heroRef.current, { pointerEvents: "none" }, 1.0);
+            tl.set(heroRef.current, { pointerEvents: "none" }, 1.2);
 
-            // ── Phase 2 (1.0 -> 2.5): About words reveal word-by-word
+            // ── Phase 2 (1.2 -> 3.2): About words reveal word-by-word (snaps word-by-word clearly)
             if (words.length > 0) {
                 tl.to(words, {
                     opacity: 1,
-                    stagger: 0.05,
-                    ease: 'none',
-                    duration: 1.5,
-                }, 1.0);
+                    fontWeight: '700',
+                    stagger: 0.08, // Wider spacing between starts
+                    duration: 0.2, // Very short individual duration = snaps one-by-one, no swipe!
+                    ease: 'power1.out',
+                }, 1.2);
             }
 
-            // ── Phase 3 (1.5 -> 3.6): Calligraphy line draws (extremely slow, 0.5x speed)
-            // Starts after ~33% of word reveal (approx. 2 lines of text) and draws very slowly
+            // ── Phase 3 (2.5 -> 4.8): Calligraphy line draws (starts after words are underway)
             if (path) {
                 const pathLen = path.getTotalLength() || 2500;
                 gsap.set(path, { strokeDasharray: pathLen, strokeDashoffset: pathLen });
 
                 tl.to(path, {
                     strokeDashoffset: 0,
-                    ease: 'power1.inOut',
-                    duration: 2.1, // Stretched duration for slow 0.5x brush stroke speed
-                }, 1.5);
+                    ease: 'power2.inOut',
+                    duration: 2.3,
+                }, 2.5);
             }
 
-            // ── Phase 4 (3.6 -> 3.8): Dot pops in
+            // ── Phase 4 (4.8 -> 5.0): Dot pops in
             if (dot) {
                 gsap.set(dot, { opacity: 0, scale: 0, transformOrigin: 'center' });
                 tl.to(dot, {
                     opacity: 1,
                     scale: 1,
-                    ease: 'back.out(2.5)',
+                    ease: 'back.out(2.2)',
                     duration: 0.2,
-                }, 3.6);
+                }, 4.8);
             }
         }
 

@@ -7,6 +7,8 @@ import { getHero } from '@/services/hero';
 import { getAbout } from '@/services/about';
 import HeroShutter from '@/components/ui/HeroShutter';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(): Promise<Metadata> {
   const heroData = await getHero().catch(() => null);
   const aboutData = await getAbout().catch(() => null);

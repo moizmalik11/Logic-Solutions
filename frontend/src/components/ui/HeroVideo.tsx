@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
-export default function HeroVideo() {
+export default function HeroVideo({ videoUrl, posterUrl }: { videoUrl?: string, posterUrl?: string }) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [videoLoaded, setVideoLoaded] = useState(false);
     const [videoError, setVideoError] = useState(false);
@@ -12,8 +12,8 @@ export default function HeroVideo() {
         const video = videoRef.current;
         if (!video) return;
 
-        // Lazy-load the video source after component mounts
-        video.src = '/hero_video.mov';
+        // Lazy-load the video source after component mounts (prioritize DB URL)
+        video.src = videoUrl || '/hero_video.mp4';
         video.load();
 
         const handleCanPlay = () => {
@@ -50,7 +50,7 @@ export default function HeroVideo() {
                 }`}
             >
                 <Image
-                    src="/hero_poster.jpg"
+                    src={posterUrl || "/hero_poster.jpg"}
                     alt="Hero background"
                     fill
                     priority
